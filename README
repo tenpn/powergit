@@ -1,0 +1,6 @@
+
+Interact with git through powershell.
+
+Get-GitLog
+
+-- git log as a powershell object, to be sorted or searched
