@@ -1,8 +1,8 @@
         
 
-Function Get-GitLog
+Function Get-GitLog($branch)
 {
-    (git log --format="%h {%an} {%ai} %s") `
+    (git log $branch --format="%h {%an} {%ai} %s") `
         | ?{$_ -match "([a-f0-9]+)\s{([^}]*)}\s{([^}]*)}\s(.*)$"} `
         | select @{n='SHA';e={$matches[1]}}, `
                  @{n='Author';e={$matches[2]}}, `
