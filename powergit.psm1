@@ -1,4 +1,8 @@
-        
+
+Function Get-GitFileStatus
+{
+    (git status -s)
+}
 
 Function Get-GitLog($branch)
 {
@@ -11,3 +15,7 @@ Function Get-GitLog($branch)
 }
 
 export-modulemember -function Get-GitLog
+
+new-alias -name gs -value Get-GitFileStatus
+export-modulemember -function Get-GitFileStatus -alias gs
+
