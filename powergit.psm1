@@ -14,8 +14,19 @@ Function Get-GitLog($branch)
                  @{n='Subject';e={$matches[4]}}
 }
 
+Function Get-GitUnusedRemoteBranches
+{
+    (git branch -r --merged develop) `
+        | %{$_.trim()} `
+        | select  `
+            @{n='Branch';e={$_}}, `
+            @{n='LastCommit';e={[datetime](git log $_ -1 --pretty=format:%ci)}}  `
+        | sort LastCommit
+}
+
 export-modulemember -function Get-GitLog
 
 new-alias -name gs -value Get-GitFileStatus
 export-modulemember -function Get-GitFileStatus -alias gs
 
+export-modulemember -function Get-GitUnusedRemoteBranches
