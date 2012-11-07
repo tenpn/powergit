@@ -24,9 +24,16 @@ Function Get-GitUnusedRemoteBranches
         | sort LastCommit
 }
 
+Function Remove-GitRemoteBranch($remote, $branch)
+{
+    (git push $remote $branch)
+}
+
 export-modulemember -function Get-GitLog
 
 new-alias -name gs -value Get-GitFileStatus
 export-modulemember -function Get-GitFileStatus -alias gs
 
 export-modulemember -function Get-GitUnusedRemoteBranches
+
+export-modulemember -function Remove-GitRemoteBranch
